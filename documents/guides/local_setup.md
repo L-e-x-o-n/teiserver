@@ -20,6 +20,7 @@ cd teiserver
 ```bash
 sudo apt update
 sudo apt install build-essential
+sudo apt install erlang-parsetools
 ```
 
 ### Elixir setup
