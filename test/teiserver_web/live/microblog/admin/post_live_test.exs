@@ -51,10 +51,10 @@ defmodule TeiserverWeb.PostLiveTest do
 
     test "basic user", %{post: post, conn: conn} do
       {:error, {:redirect, resp}} = live(conn, ~p"/microblog/admin/posts")
-      assert resp == %{flash: %{"info" => "Welcome back!"}, to: ~p"/microblog"}
+      assert resp == %{flash: %{"info" => "Welcome back!", "error" => "You do not have permission to view that page."}, to: ~p"/"}
 
       {:error, {:redirect, resp}} = live(conn, ~p"/microblog/admin/posts/#{post}")
-      assert resp == %{flash: %{"info" => "Welcome back!"}, to: ~p"/microblog"}
+      assert resp == %{flash: %{"info" => "Welcome back!",  "error" => "You do not have permission to view that page."}, to: ~p"/"}
 
       {:ok, _show_live, html} = live(conn, ~p"/microblog/show/#{post}")
       refute html =~ "Delete post"

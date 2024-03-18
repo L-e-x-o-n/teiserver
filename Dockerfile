@@ -5,4 +5,4 @@ ENV LANG=en_US.UTF-8 \
     MIX_ENV=$env
 WORKDIR /opt/build
 ADD ./bin/build ./bin/build
-CMD ["bin/build"]
+CMD ["./bin/build"]

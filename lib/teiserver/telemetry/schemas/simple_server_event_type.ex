@@ -11,6 +11,8 @@ defmodule Teiserver.Telemetry.SimpleServerEventType do
   """
   @spec changeset(Map.t(), Map.t()) :: Ecto.Changeset.t()
   def changeset(struct, params \\ %{}) do
+    IO.inspect(struct, label: "Struct:")
+    IO.inspect(params, label: "Params:")
     struct
     |> cast(params, ~w(name)a)
     |> validate_required(~w(name)a)

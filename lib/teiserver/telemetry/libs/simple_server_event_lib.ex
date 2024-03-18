@@ -33,7 +33,7 @@ defmodule Teiserver.Telemetry.SimpleServerEventLib do
             "telemetry_simple_server_events",
             %{
               channel: "telemetry_simple_server_events",
-              userid: userid,
+              user_id: userid,
               event_type_name: event_type_name
             }
           )
