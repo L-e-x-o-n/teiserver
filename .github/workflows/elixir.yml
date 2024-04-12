@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      db:
-        image: postgres:11
+      postgres:
+        image: postgres
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres
@@ -46,3 +46,8 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+      env:
+        # The hostname used to communicate with the PostgreSQL service container
+        POSTGRES_HOST: localhost
+        # The default PostgreSQL port
+        POSTGRES_PORT: 5432
