@@ -7,9 +7,6 @@ name: Elixir CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 permissions:
   contents: read
@@ -31,7 +28,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-          
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Elixir
