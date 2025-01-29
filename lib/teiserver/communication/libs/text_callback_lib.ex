@@ -67,6 +67,11 @@ defmodule Teiserver.Communication.TextCallbackLib do
       where: ilike(text_callbacks.name, ^ref_like)
   end
 
+  def _search(query, :category, category_list) do
+    from text_callbacks in query,
+      where: text_callbacks.category in ^category_list
+  end
+
   @spec order_by(Ecto.Query.t(), String.t() | nil) :: Ecto.Query.t()
   def order_by(query, nil), do: query
 
@@ -78,6 +83,16 @@ defmodule Teiserver.Communication.TextCallbackLib do
   def order_by(query, "Name (Z-A)") do
     from text_callbacks in query,
       order_by: [desc: text_callbacks.name]
+  end
+
+  def order_by(query, "Category (A-Z)") do
+    from text_callbacks in query,
+      order_by: [asc: text_callbacks.category]
+  end
+
+  def order_by(query, "Category (Z-A)") do
+    from text_callbacks in query,
+      order_by: [desc: text_callbacks.category]
   end
 
   def order_by(query, "Newest first") do

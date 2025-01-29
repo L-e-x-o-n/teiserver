@@ -32,6 +32,8 @@
             <tr>
               <th colspan="2">Callback</th>
 
+              <th>Category</th>
+
               <th>Enabled</th>
 
               <th>Triggers</th>
@@ -50,6 +52,8 @@
                 <td style={"background-color: #{rgba_css text_callback.colour};"}>
                   <%= text_callback.name %>
                 </td>
+
+                <td>text_callback.category</td>
 
                 <td>
                   <%= if text_callback.enabled do %>

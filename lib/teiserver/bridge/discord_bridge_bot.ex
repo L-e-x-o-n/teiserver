@@ -167,30 +167,41 @@ defmodule Teiserver.Bridge.DiscordBridgeBot do
   def add_command(:textcb) do
     callbacks = Communication.list_text_callbacks()
 
-    choices =
+    # Group by category
+    category_groups =
       callbacks
-      |> Enum.map(fn cb ->
+      |> Enum.group_by(& &1.category)
+      |> Enum.map(fn {category, cbs} ->
+        choices =
+          cbs
+          |> Enum.map(fn cb ->
+            %{
+              name: cb.name,
+              value: hd(cb.triggers)
+            }
+          end)
+          |> Enum.take(25)  # Discord limit
+
         %{
-          name: cb.name,
-          value: hd(cb.triggers)
+          name: category |> String.downcase() |> String.replace(" ", "_"),
+          description: "#{category} commands",
+          type: 1,  # 1 = Subcommand
+          options: [
+            %{
+              type: 3,  # 3 = String
+              name: "reference",
+              description: "Select command",
+              required: true,
+              choices: choices
+            }
+          ]
         }
       end)
-      # 25 is the Discord limit of choices per / command
-      |> Enum.take(25)
 
     command = %{
-      name: "textcb",
-      description: "CopyPasta some text",
-      options: [
-        %{
-          # Type3 = String
-          type: 3,
-          name: "reference",
-          description: "The name of the reference",
-          required: true,
-          choices: choices
-        }
-      ],
+      name: "text",
+      description: "Text callbacks",
+      options: category_groups,
       nsfw: false
     }
 

@@ -9,6 +9,8 @@ defmodule Teiserver.Communication.TextCallback do
     field :colour, :string
     field :enabled, :boolean, default: true
 
+    field :category, :string
+
     field :triggers, {:array, :string}
 
     field :response, :string
@@ -28,8 +30,8 @@ defmodule Teiserver.Communication.TextCallback do
       |> trim_strings(~w(name)a)
 
     struct
-    |> cast(params, ~w(name icon colour triggers response enabled rules last_triggered)a)
-    |> validate_required(~w(name icon colour triggers response)a)
+    |> cast(params, ~w(name category icon colour triggers response enabled rules last_triggered)a)
+    |> validate_required(~w(name category icon colour triggers response)a)
     |> validate_length(:triggers, min: 1)
   end
 
