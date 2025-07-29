@@ -1568,7 +1568,7 @@ defmodule Teiserver.Coordinator.ConsulCommands do
       #   )
       #   state
 
-      lobby.lobby_policy_id && starts_with_lobby_policy ->
+      state.lobby_policy_id && starts_with_lobby_policy ->
         Lobby.sayex(
           state.coordinator_id,
           "This is not a server managed lobby, you cannot use that name",
